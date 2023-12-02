@@ -12,7 +12,7 @@ protocols.
 ## NATS
 
 NATS uses a long running TCP connection for publishing and subscribing. It has Ping/Pong method that we can use to detect connection failure before
-getting the failure from operating system.
+getting the failure from the operating system.
 
 For having a better insight about the problem, I am going to demostrate it using a simple NATS publisher. I deployed a NATS cluster on minikube, using
 port-forward to connect into it and then close the port-forward command to see how it goes.
