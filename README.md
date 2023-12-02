@@ -11,4 +11,7 @@ protocols.
 
 ## NATS
 
+NATS uses a long running TCP connection for publishing and subscribing. It has Ping/Pong method that we can use to detect connection failure before
+getting the failure from operating system.
+
 ## MQTT
