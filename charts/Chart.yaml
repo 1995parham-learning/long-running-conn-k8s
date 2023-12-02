@@ -1,0 +1,10 @@
+---
+apiVersion: v2
+name: nats
+description: nats with jetstream chart's values
+type: application
+version: 0.0.0
+dependencies:
+  - name: nats
+    version: 1.1.5
+    repository: https://nats-io.github.io/k8s/helm/charts

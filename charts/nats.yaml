@@ -1,0 +1,58 @@
+---
+global:
+  labels:
+    app: nats
+    team: main
+
+natsBox:
+  enabled: false
+
+gateway:
+  enabled: false
+
+config:
+  cluster:
+    noAdvertise: true
+    enabled: true
+    replicas: 3
+
+  gateway:
+    enabled: false
+
+  jetstream:
+    enabled: true
+    memoryStore:
+      enabled: true
+      maxSize: 512Mi
+    fileStore:
+      enabled: false
+      storageDirectory: /data
+      pvc:
+        enabled: true
+        size: 1Gi
+
+container:
+  merge:
+    resources:
+      requests:
+        cpu: 1
+        memory: 1Gi
+        ephemeral-storage: 1Gi
+      limits:
+        cpu: 1
+        memory: 1Gi
+        ephemeral-storage: 1Gi
+
+promExporter:
+  enabled: false
+
+# Define a Pod Disruption Budget for the stateful set
+# #   # ref: https://kubernetes.io/docs/concepts/workloads/pods/disruptions/
+# #     podDisruptionBudget:
+# #         enabled: false
+# #             maxUnavailable: 1
+# #                 # minAvailable: 1
+# #
+# #
+#
+
