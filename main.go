@@ -13,16 +13,19 @@ func main() {
 		nats.ReconnectHandler(func(nc *nats.Conn) {
 			log.Printf("Reconnected to %v", nc.ConnectedUrl())
 		}),
-		nats.DisconnectHandler(func(nc *nats.Conn) {
+		nats.DisconnectHandler(func(_ *nats.Conn) {
 			log.Println("Disconnected")
 		}),
 		nats.ClosedHandler(func(nc *nats.Conn) {
 			log.Fatalf("Connection closed. Reason: %v", nc.LastError())
 		}),
+		nats.PingInterval(5 * time.Second),
+		nats.MaxPingsOutstanding(2),
 	}
 
 	// Connect to the NATS server
-	nc, err := nats.Connect("nats://172.19.1.4:4222", nats.PingInterval(5*time.Second), nats.MaxPingsOutstanding(2), opts[0], opts[1], opts[2])
+	nc, err := nats.Connect("nats://127.0.0.1:4222",
+		opts...)
 	if err != nil {
 		log.Fatal(err)
 	}
