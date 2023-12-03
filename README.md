@@ -3,7 +3,7 @@
 ## Introduction
 
 One of the main issues we have on Kubernetes Networking is handling long-running connections.
-These connections may got disconnected but it takes time (based on the OS TCP configuration) to figured out,
+These connections may get disconnected, but it takes time (based on the OS TCP configuration) to figured out,
 so we need to have application-layer way to detect these issues and react on them.
 
 Because solution should be in the application layer, we need to consider different way for different
@@ -11,10 +11,23 @@ protocols.
 
 ## NATS
 
-NATS uses a long running TCP connection for publishing and subscribing. It has Ping/Pong method that we can use to detect connection failure before
+NATS uses a long-running TCP connection for publishing and subscribing. It has Ping/Pong method that we can use to detect connection failure before
 getting the failure from the operating system.
 
-For having a better insight about the problem, I am going to demostrate it using a simple NATS publisher. I deployed a NATS cluster on minikube, using
+For having a better insight about the problem, I am going to demostrate it using a simple NATS publisher. I deployed a NATS cluster on Minikube, using
 port-forward to connect into it and then close the port-forward command to see how it goes.
+
+Based on the following logs, you can see it figured out instantly:
+
+```
+2023/12/03 07:42:48 Published message: hello
+2023/12/03 07:42:49 Published message: hello
+2023/12/03 07:42:50 Published message: hello
+2023/12/03 07:42:51 Disconnected
+2023/12/03 07:42:51 Not connected. Waiting to reestablish the connection.
+2023/12/03 07:42:52 Not connected. Waiting to reestablish the connection.
+2023/12/03 07:42:53 Not connected. Waiting to reestablish the connection.
+2023/12/03 07:42:54 Not connected. Waiting to reestablish the connection.
+```
 
 ## MQTT
