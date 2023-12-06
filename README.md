@@ -31,7 +31,7 @@ Based on the following logs, you can see it figured out instantly:
 ```
 
 This happens because I terminate connection in one of its ends and it generates the _FIN_ packet,
-in the production environment this may happen in one of the intermediate nodes which don't generate any
+in the production environment this may happen in one of the intermediate nodes which doesn't generate any
 _FIN_ packet.
 
 ## MQTT
