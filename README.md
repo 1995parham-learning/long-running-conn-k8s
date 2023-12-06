@@ -30,4 +30,8 @@ Based on the following logs, you can see it figured out instantly:
 2023/12/03 07:42:54 Not connected. Waiting to reestablish the connection.
 ```
 
+This happens because I terminate connection in one of its ends and it generates the _FIN_ packet,
+in the production environment this may happen in one of the intermediate nodes which don't generate any
+_FIN_ packet.
+
 ## MQTT
