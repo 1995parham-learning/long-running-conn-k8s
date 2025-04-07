@@ -39,11 +39,11 @@ Here's a breakdown of why:
             * The client eventually tries to send data (triggering the RST as above).
             * TCP Keep-Alives (if enabled and configured on *both* client and server sides, and not blocked by firewalls) eventually time out. Keep-alive probes are sent periodically on idle connections. If enough probes go unanswered, the client OS will time out the connection. Default keep-alive timeouts can be very long (e.g., 2 hours).
 
-**Conclusion:**
+### Conclusion
 
 Forcefully deleting a pod prevents the server application from initiating the standard TCP connection closure. While the server-side resources are cleaned up quickly, the client might not realize the connection is dead for a potentially long time, especially if it's idle and relying on default TCP keep-alive settings. This leads to a delay in the client-side connection closing and can leave the client application hanging or holding onto resources unnecessarily.
 
-**Recommendation:**
+### Recommendation
 
 Always favor graceful termination. Allow pods sufficient `terminationGracePeriodSeconds` to shut down cleanly, close connections properly, and ensure your application handles `SIGTERM` appropriately. Forceful deletion should only be used as a last resort for stuck pods.
 
